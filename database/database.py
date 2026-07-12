@@ -6,6 +6,8 @@ DB_NAME = "data/studygenie.db"
 
 
 def connect_db():
+    os.makedirs("data", exist_ok=True)   # Create the data folder if it doesn't exist
+
     print("Database path:", os.path.abspath(DB_NAME))
 
     return sqlite3.connect(DB_NAME)
