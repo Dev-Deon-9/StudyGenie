@@ -29,6 +29,8 @@ async def receive_pdf(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     telegram_id = update.effective_user.id
     new_file_name = f"{telegram_id}_{document.file_name}"
+    os.makedirs("uploads", exist_ok=True)
+    os.makedirs("uploads/notes", exist_ok=True)
     save_path = os.path.join("uploads", new_file_name)
 
     await file.download_to_drive(save_path)
