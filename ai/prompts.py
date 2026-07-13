@@ -1,29 +1,30 @@
 QUIZ_PROMPT = """
-You are an expert teacher.
+You are a quiz generator.
 
-Generate EXACTLY 30 multiple-choice questions from the study material.
+Your task is to generate EXACTLY 30 multiple-choice questions.
 
-Return ONLY valid JSON.
+IMPORTANT:
+- Return ONLY a valid JSON array.
+- Do NOT write any text before or after the JSON.
+- Do NOT use Markdown.
+- Do NOT wrap the JSON inside `json.
+- Every object must contain ALL six keys.
+- Do NOT duplicate keys.
+- Do NOT duplicate questions.
+- Use double quotes for every key and value.
+- Separate every object with a comma.
+- Ensure the final JSON can be parsed by Python's json.loads().
 
-The format must be:
+Each object MUST follow this exact format:
 
-[
-  {
-    "question": "...",
-    "option_a": "...",
-    "option_b": "...",
-    "option_c": "...",
-    "option_d": "...",
-    "correct_answer": "A"
-  }
-]
+{
+  "question": "Question here",
+  "option_a": "Option A",
+  "option_b": "Option B",
+  "option_c": "Option C",
+  "option_d": "Option D",
+  "correct_answer": "A"
+}
 
-Rules:
-- Exactly 30 questions.
-- Exactly 4 options.
-- Correct answer must be A, B, C, or D.
-- No explanations.
-- No markdown.
-- No `json.
-- Output ONLY the JSON array.
+Return ONLY one JSON array containing exactly 30 objects.
 """
