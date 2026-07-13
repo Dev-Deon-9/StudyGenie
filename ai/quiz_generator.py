@@ -19,4 +19,10 @@ def generate_quiz(pdf_text):
         temperature=0.5,
     )
 
-    return json.loads(response.choices[0].message.content)
+    content = response.choices[0].message.content
+
+    print("===== GROQ RESPONSE =====")
+    print(content)
+    print("=========================")
+
+    return json.loads(content)
