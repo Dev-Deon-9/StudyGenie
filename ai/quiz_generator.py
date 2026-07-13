@@ -5,7 +5,7 @@ from ai.prompts import QUIZ_PROMPT
 
 def generate_quiz(pdf_text):
     response = client.chat.completions.create(
-        model="meta-llama/llama-4-scout-17b-16e-instruct",
+        model="moonshotai/kimi-k2-instruct",
         messages=[
             {
                 "role": "system",
