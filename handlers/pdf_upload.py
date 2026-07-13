@@ -34,8 +34,14 @@ async def receive_pdf(update: Update, context: ContextTypes.DEFAULT_TYPE):
     save_path = os.path.join("uploads", new_file_name)
 
     await file.download_to_drive(save_path)
+
     text = extract_text(save_path)
+
+    # Limit the amount of text sent to the AI
+    text = text[:12000]
+
     questions = generate_quiz(text)[:30]
+
     flashcards = generate_flashcards(text)
     flashcards = parse_flashcards(flashcards)
     print(f"Generated {len(questions)} questions")
