@@ -28,7 +28,13 @@ def generate_quiz(pdf_text):
 
     # Try normal JSON parsing first
     try:
-        return json.loads(content)
+        from ai.quiz_parser import parse_quiz
+
+        content = response.choices[0].message.content
+
+        return parse_quiz(content)
+
+
     except json.JSONDecodeError:
         pass
 
