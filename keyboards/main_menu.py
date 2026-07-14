@@ -7,7 +7,7 @@ def main_menu():
         ["🖼️ Upload Notes"],
         ["📝 Take Quiz"],
         ["🔄 Retake Quiz"],
-        ["📊 progress"]
+        ["📊 progress"],
         ["❓ Help"]
     ]
 
