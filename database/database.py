@@ -37,6 +37,14 @@ def create_tables():
                        """)
     except:
         pass
+
+    try:
+        cursor.execute("""
+                       ALTER TABLE users
+                           ADD COLUMN banned INTEGER DEFAULT 0
+                       """)
+    except:
+        pass
     conn.commit()
     conn.close()
 
@@ -93,3 +101,90 @@ def list_tables():
     print("📋 Tables:", cursor.fetchall())
 
     conn.close()
+
+def add_pdf_upload(telegram_id):
+        conn = connect_db()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+                       UPDATE users
+                       SET pdfs_uploaded = pdfs_uploaded + 1
+                       WHERE telegram_id = ?
+                       """, (telegram_id,))
+
+        conn.commit()
+        conn.close()
+
+def add_note_upload(telegram_id):
+        conn = connect_db()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+                       UPDATE users
+                       SET notes_uploaded = notes_uploaded + 1
+                       WHERE telegram_id = ?
+                       """, (telegram_id,))
+
+        conn.commit()
+        conn.close()
+
+def add_correct_answer(telegram_id):
+        conn = connect_db()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+                       UPDATE users
+                       SET total_correct = total_correct + 1
+                       WHERE telegram_id = ?
+                       """, (telegram_id,))
+
+        conn.commit()
+        conn.close()
+
+def add_wrong_answer(telegram_id):
+        conn = connect_db()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+                       UPDATE users
+                       SET total_wrong = total_wrong + 1
+                       WHERE telegram_id = ?
+                       """, (telegram_id,))
+
+        conn.commit()
+        conn.close()
+
+def add_quiz_taken(telegram_id):
+        conn = connect_db()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+                       UPDATE users
+                       SET quizzes_taken = quizzes_taken + 1
+                       WHERE telegram_id = ?
+                       """, (telegram_id,))
+
+        conn.commit()
+        conn.close()
+
+def get_profile(telegram_id):
+        conn = connect_db()
+        cursor = conn.cursor()
+
+        cursor.execute("""
+                       SELECT first_name,
+                              joined_at,
+                              pdfs_uploaded,
+                              notes_uploaded,
+                              quizzes_taken,
+                              total_correct,
+                              total_wrong
+                       FROM users
+                       WHERE telegram_id = ?
+                       """, (telegram_id,))
+
+        profile = cursor.fetchone()
+
+        conn.close()
+
+        return profile

@@ -4,7 +4,6 @@ from handlers.pdf_upload import receive_pdf
 from handlers.quiz import take_quiz
 from handlers.answer import check_answer
 from handlers.retake import retake_quiz
-from handlers.flashcards import show_flashcards
 from handlers.progress import show_progress
 from handlers.admin import admin_panel
 from handlers.admin_callbacks import admin_buttons
@@ -18,21 +17,13 @@ from handlers.help import (
 )
 from database.support_db import create_support_table
 from telegram.ext import CallbackQueryHandler
-from handlers.flashcard_callbacks import (
-    reveal_answer,
-    next_card,
-    previous_card,
-)
 
 from config import BOT_TOKEN
 from handlers.start import start
 from handlers.pdf_upload import ask_for_pdf
 from database.database import create_tables
 from database.pdf_database import create_pdf_table
-from database.flashcard_database import (
-    create_flashcard_table,
-    create_flashcard_progress_table,
-)
+
 
 from handlers.note_upload import (
     ask_for_note,
@@ -88,12 +79,6 @@ app.add_handler(
         retake_quiz
     )
 )
-app.add_handler(
-    MessageHandler(
-        filters.TEXT & filters.Regex("^🃏 Flashcards$"),
-        show_flashcards
-    )
-)
 
 app.add_handler(
     MessageHandler(
@@ -119,25 +104,7 @@ app.add_handler(
     )
 )
 
-app.add_handler(
-    CallbackQueryHandler(
-        reveal_answer,
-        pattern="^reveal_"
-    )
-)
-app.add_handler(
-    CallbackQueryHandler(
-        next_card,
-        pattern="^next_"
-    )
-)
 
-app.add_handler(
-    CallbackQueryHandler(
-        previous_card,
-        pattern="^previous_"
-    )
-)
 app.add_handler(
     CallbackQueryHandler(
         admin_buttons,
@@ -173,9 +140,7 @@ app.add_handler(
 create_tables()
 create_pdf_table()
 create_progress_table()
-create_flashcard_table()
 create_quiz_table()
-create_flashcard_progress_table()
 create_support_table()
 create_note_table()
 from database.database import list_tables

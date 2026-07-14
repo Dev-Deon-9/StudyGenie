@@ -8,7 +8,6 @@ def main_menu():
         ["📝 Take Quiz"],
         ["🔄 Retake Quiz"],
         ["🃏 Flashcards"],
-        ["📊 Progress"],
         ["❓ Help"]
     ]
 
