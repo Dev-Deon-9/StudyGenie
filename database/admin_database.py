@@ -6,8 +6,8 @@ def get_total_users():
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT COUNT(DISTINCT telegram_id)
-        FROM pdfs
+        SELECT COUNT(*)
+        FROM users
     """)
 
     total = cursor.fetchone()[0]
@@ -24,22 +24,6 @@ def get_total_pdfs():
     cursor.execute("""
         SELECT COUNT(*)
         FROM pdfs
-    """)
-
-    total = cursor.fetchone()[0]
-
-    conn.close()
-
-    return total
-
-
-def get_total_flashcards():
-    conn = connect_db()
-    cursor = conn.cursor()
-
-    cursor.execute("""
-        SELECT COUNT(*)
-        FROM flashcards
     """)
 
     total = cursor.fetchone()[0]

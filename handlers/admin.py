@@ -9,7 +9,6 @@ from database.admin_database import (
     get_total_users,
     get_total_pdfs,
     get_total_quizzes,
-    get_total_flashcards,
 )
 
 ADMIN_ID = 7930223390
@@ -29,7 +28,6 @@ async def admin_panel(
     total_users = get_total_users()
     total_pdfs = get_total_pdfs()
     total_quizzes = get_total_quizzes()
-    total_flashcards = get_total_flashcards()
 
     keyboard = [
         [
@@ -72,7 +70,6 @@ async def admin_panel(
 👥 Total Users: {total_users}
 📄 PDFs Uploaded: {total_pdfs}
 📝 Quizzes Generated: {total_quizzes}
-🃏 Flashcards Generated: {total_flashcards}
 ⭐ Premium Users: 0
 """,
         reply_markup=InlineKeyboardMarkup(keyboard)
